@@ -1,0 +1,126 @@
+// Enum с разным типом RawValue
+
+// Enum с типом String
+enum Country: String {
+    case usa = "США"
+    case japan = "Япония"
+    case france = "Франция"
+}
+
+enum Fruit: String {
+    case apple = "Яблоко"
+    case banana = "Банан"
+    case orange = "Апельсин"
+}
+
+// Enum с типом Int
+enum DayOfWeek: Int {
+    case monday = 1
+    case tuesday = 2
+    case wednesday = 3
+    case thursday = 4
+}
+
+enum Month: Int {
+    case january = 1
+    case february = 2
+    case march = 3
+    case april = 4
+}
+
+// Enum пол
+enum Gender: String {
+    case male = "Мужской"
+    case female = "Женский"
+}
+
+// Enum категория возраста
+enum AgeCategory: Int {
+    case child = 0
+    case teen = 1
+    case adult = 2
+    case senior = 3
+}
+
+// Enum стаж
+enum Experience: Double {
+    case junior = 1.5
+    case intermediate = 3.0
+    case senior = 5.0
+}
+
+// Enum с цветами радуги
+enum RainbowColor: String {
+    case red = "Красный"
+    case orange = "Оранжевый"
+    case yellow = "Желтый"
+    case green = "Зеленый"
+    case blue = "Голубой"
+    case indigo = "Синий"
+    case violet = "Фиолетовый"
+}
+
+print("Пол: \(Gender.male.rawValue)")
+print("Категория возраста: \(AgeCategory.adult.rawValue)")
+print("Стаж: \(Experience.senior.rawValue) лет")
+
+// Функция для случайного выбора
+func printRandom<T, U>(enum1: [T], enum2: [U]) where T: RawRepresentable, U: RawRepresentable, T.RawValue == String, U.RawValue == String {
+    guard let randomFruit = enum1.randomElement(),
+          let randomColor = enum2.randomElement() else {
+        return
+    }
+    print("\(randomFruit.rawValue) \(randomColor.rawValue)")
+}
+
+let rainbowColors: [RainbowColor] = [.red, .orange, .yellow, .green, .blue, .indigo, .violet]
+let fruits: [Fruit] = [.apple, .banana, .orange]
+
+
+for _ in 1...5 {
+    printRandom(enum1: fruits, enum2: rainbowColors)
+}
+
+
+// Функция для выставления оценок ученикам
+enum Score: String {
+    case excellent = "Отлично"
+    case good = "Хорошо"
+    case satisfactory = "Удовлетворительно"
+    case needsImprovement = "Неудовлетворительно"
+}
+
+func rateStudent(score: Score) -> Int {
+    switch score {
+    case .excellent:
+        return 5
+    case .good:
+        return 4
+    case .satisfactory:
+        return 3
+    case .needsImprovement:
+        return 2
+    }
+}
+
+let studentScore: Score = .good
+let score = rateStudent(score: studentScore)
+print("\nОценка студента: \(studentScore.rawValue) - \(score)")
+
+// Enum для автомобилей в гараже
+enum CarType: String {
+    case X5 = "X5"
+    case lada7 = "2107"
+    case sportCar = "Спорткар"
+}
+
+func Garage() {
+    let garage: [CarType] = [.X5, .lada7, .sportCar]
+    
+    for car in garage {
+        print("В гараже стоит \(car.rawValue)")
+    }
+}
+
+print("\nСостав гаража:")
+Garage()
